@@ -1,0 +1,74 @@
+{% extends 'usernavigation.html' %}
+{% load static%}
+{% block body %}
+
+<div class="container mt-5">
+    <h2 class="text-center">UPLOAD NOTES</h2>
+    <hr>
+<div class="row">
+
+    <div class="col-sm-6">
+
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <label>Branch</label>
+            <select class="form-control" name="branch">
+                <option value="">------Select Branch-----</option>
+                <option value="Computer Science">Computer Science </option>
+                <option value="Mechanical">Mechanical </option>
+                <option value="Civil">Civil</option>
+                <option value="Electrical">Electrical</option>
+                <option value="Electronics">Electronics</option>
+            </select>
+            
+            <label>Subject</label>
+            <input type="text" class="form-control" placeholder="Enter Subject" name="subject">
+            
+            <label>Notes File</label>
+            <input type="file" class="form-control" name="notefile" accept=".pdf,.ppt,.doc,.docx,.txt,.jpg,.jpeg,.png,.zip,.rar" required>
+            
+            <label>File Type</label>
+            <select class="form-control" name="filetype">
+                <option value="">------Select File Type-----</option>
+                <option value="pdf">PDF </option>
+                <option value="ppt">PPT </option>
+                <option value="doc/dcox">DOC/DOCX</option>
+                <option value="txt">TXT</option>
+                <option value="image">Image</option>
+                <option value="zip/rar">ZIP/RAR</option>
+            </select>
+
+            <label>Description</label>
+            <textarea class="form-control" name="description" placeholder="Enter a description">
+           
+            </textarea>
+            
+            <input type = "submit" class="btn btn-danger mt-2" value= "SUBMIT">
+            
+        </form>    
+    </div>
+
+    <div class="col-sm-6">
+       <img src = "{% static 'images/img2.jpg' %}" style = "width:90% ; height:400px" class="mt-2">
+    </div>
+</div>
+</div>
+
+{% if error == "no" %}
+<script>
+    alert('Notes Uploaded Successfully');
+    window.location=('{% url 'view_mynotes' %}');
+</script>
+
+{% elif error == "yes" %}
+<script>
+    alert('Something Went Wrong, Try Again');
+</script>
+
+{% elif error == "no_file" %}
+<script>
+    alert('Please select a file to upload.');
+</script>
+{% endif %}
+
+{% endblock %}

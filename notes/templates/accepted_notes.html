@@ -1,0 +1,63 @@
+{% extends 'admin_nav.html' %}
+{% load static%}
+{% block body %}
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
+<script src="https://cdn.datatables.net/2.1.8/js/dataTables.bootstrap5.js"></script>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.bootstrap5.css">
+
+<script>
+$(document).ready(function(){
+    $('#example').DataTable();
+});
+</script>
+
+<div class="container mt-5">
+    <h2 class="text-center">VIEWS ACCEPTED NOTES</h2>
+    <hr>
+    
+    <table class="table table-bordered" id ="example">
+    <thead>
+        <tr>
+            <th>Sr. No. </th>
+            <th>Uploading By </th>
+            <th>Uploading Date </th>
+            <th>Branch </th>
+            <th>Subject </th>
+            <th>File Type </th>
+            <th>Description </th>
+            <th>Status </th>
+            <th>Download Notes </th>
+            <th>Action </th>
+            <th>Assign Status </th>
+
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for i in notes %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{i.user.username}}</td>
+            <td>{{i.uploadingdate}}</td>
+            <td>{{i.branch}}</td>
+            <td>{{i.subject}}</td>
+            <td>{{i.filetype}}</td>
+            <td>{{i.description}}</td>
+            <td>{{i.status}}</td>
+            <td><a href="{{i.notefile.url}}"class ="btn btn-success" download>Download</a></td>
+            <td><a href="{% url 'delete_notes' i.id %}"class ="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</a></td>
+            <td><a href="{% url 'assign_status' i.id %}"class ="btn btn-success" >Assign&nbsp;Status</a></td>
+           
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>
+
+
+{% endblock %}

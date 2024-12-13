@@ -1,0 +1,75 @@
+{% extends 'admin_nav.html' %}
+{% load static %}
+{% block body %}
+
+<style>
+    .container1{
+        background-color : lightgray;
+        border-radius : 8px;
+}
+h2,h4{padding : 10px}
+
+.mydiv:hover{
+transform:translateY(-10px)
+}
+
+.glow{
+    font-size:80px;
+    color: #fff;
+    text-align: center;
+    -webkit-animation: glow 1s ease-in-out infinite alternate;
+}
+
+@-webkit-keyframes glow{
+    from{
+        text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073,
+         0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;
+        }
+    to{
+        text-shadow: 0 0 20px #fff,0 0 30px #ff4da6, 0 0 40px #ff4da6, 0 0 50px #ff4da6,
+         0 0 60px #ffda6, 0 0 70px #ff4da6, 0 0 80px #ff4da6;
+      }
+    }
+</style>
+<br><br>
+<div class= "container mt-5">
+    <div class = "row">
+        <div class="col-sm-3 text-center mydiv">
+            <div class="container1">
+                <h2 class="text-primary">{{pn}}</h2> 
+                <a href="{% url 'pending_notes'%}"><h4 class="text-dark">PENDING NOTES</h4></a>
+            </div>
+        </div>
+        
+        <div class="col-sm-3 text-center mydiv">
+            <div class="container1">
+                <h2 class="text-primary">{{an}}</h2> 
+                <a href="{% url 'accepted_notes'%}"><h4 class="text-dark">ACCEPTED NOTES</h4></a>
+            </div>
+        </div>
+        
+        <div class="col-sm-3 text-center mydiv">
+            <div class="container1">
+                <h2 class="text-primary">{{rn}}</h2> 
+                <a href="{% url 'rejected_notes'%}"><h4 class="text-dark">REJECTED NOTES</h4></a>
+            </div>
+        </div>
+        
+        <div class="col-sm-3 text-center mydiv">
+            <div class="container1">
+                <h2 class="text-primary">{{alln}}</h2> 
+                <a href="{% url 'view_allnotes'%}"><h4 class="text-dark">ALL NOTES</h4></a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<footer class="container mt-5 text-center">
+    <p style ="font-size:30pt; color : red; font-weight: bold">Copyright &copy; 
+        <script>document.write(new Date().getFullYear());</script>
+        All Right Reserved <span style = "color : brown">|</span> <span style = "color : #006400">This website is made with
+        <i class="fas fa-heart icon-heart text-warning"> by </i><br>
+        </span><a class = "glow" href="#" target="_blank"> Manshika Patel</a> </p>
+</footer>
+{% endblock %}
